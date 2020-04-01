@@ -1,0 +1,14 @@
+{
+  "Servers": {
+    "1": {
+      "Name": "DragonCore",
+      "Group": "Servers",
+      "Port": 5432,
+      "Username": "postgres",
+      "PassFile": "/pgpass.conf",
+      "Host": "db",
+      "SSLMode": "disable",
+      "MaintenanceDB": "postgres"
+    }
+  }
+}

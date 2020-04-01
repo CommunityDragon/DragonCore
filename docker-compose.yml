@@ -51,7 +51,6 @@ services:
       - "traefik.http.routers.frontend-developer.service=frontend-developer-dragoncore"
       - "traefik.http.services.frontend-developer-dragoncore.loadbalancer.server.port=8081"
 
-
   ## FRONTEND DEVELOPER
   frontend-auth:
     build: build/dev/vue
@@ -67,6 +66,47 @@ services:
       - "traefik.http.routers.frontend-auth.rule=Host(`auth.communitydragon.localhost`)"
       - "traefik.http.routers.frontend-auth.service=frontend-auth-dragoncore"
       - "traefik.http.services.frontend-auth-dragoncore.loadbalancer.server.port=8082"
+
+  # POSTGRES DATABASE
+  db:
+    image: postgres:12
+    volumes:
+      - ./build/dev/postgres/init:/docker-entrypoint-initdb.d
+    networks:
+      - db-dev
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DATABASES=app,hydra
+
+  # PGADMIN
+  pgadmin:
+    build: build/dev/pgadmin
+    networks:
+      - db-dev
+    depends_on:
+      - db
+    ports:
+      - 5050:80
+
+  # ORY HYDRA / OAUTH2
+  hydra:
+    build: build/dev/hydra
+    networks:
+      - web-dev
+      - db-dev
+    depends_on:
+      - db
+    environment:
+      - LOG_LEVEL=debug
+      - SECRETS_SYSTEM=dragoncoresecret
+      - DSN=postgres://postgres:postgres@db/hydra?sslmode=disable
+      - URLS_SELF_ISSUER=https://localhost:4445
+      - URLS_CONSENT=http://api.communitydragon.localhost/oauth2/consent
+      - URLS_CONSENT=http://api.communitydragon.localhost/oauth2/login
+    ports:
+    - 4444:4444
+    - 4445:4445
 
   ## PROXY
   proxy:
@@ -108,4 +148,6 @@ services:
 
 networks:
   web-dev:
+    driver: bridge
+  db-dev:
     driver: bridge
