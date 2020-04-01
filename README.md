@@ -30,7 +30,7 @@ ROOT
 ## Prerequisites
 - [Go 1.14+](https://golang.org/) (optional)
 - [Node 12+](https://nodejs.org/en/) (optional)
-  - [Yarn](https://yarnpkg.com/)
+  - [Yarn 1.X](https://classic.yarnpkg.com/)
 - [Docker](https://www.docker.com/)
   - [Compose](https://docs.docker.com/compose/install/)
 
