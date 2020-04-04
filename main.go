@@ -8,7 +8,6 @@ import (
 
 func main() {
 	e := echoswagger.New(echo.New(), "/swagger", nil)
-	e.
 	modules.Bundler.Register(e)
 	e.Echo().Logger.Fatal(e.Echo().Start(":80"))
 }
