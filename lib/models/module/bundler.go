@@ -2,7 +2,7 @@ package module
 
 import (
 	"fmt"
-	"github.com/labstack/echo/v4"
+	"github.com/pangpanglabs/echoswagger/v2"
 	"sync"
 )
 
@@ -22,7 +22,7 @@ func (b *bundler) Bundle(module *module) *bundler {
 }
 
 // Register registers all bundles
-func (b *bundler) Register(e *echo.Echo) (errs []error) {
+func (b *bundler) Register(e echoswagger.ApiRoot) (errs []error) {
 	var wg sync.WaitGroup
 	for _, module := range b.modules {
 		wg.Add(1)
