@@ -3,7 +3,7 @@ version: '3'
 services:
   ## API
   api:
-    build: build/dev/echo
+    build: docker/dev/echo
     volumes:
       - .:/app
     networks:
@@ -16,7 +16,7 @@ services:
 
   ## FRONTEND MAIN
   frontend-main:
-    build: build/dev/vue
+    build: docker/dev/vue
     command: --scope=frontend-main-dragoncore
     volumes:
       - .:/app
@@ -37,7 +37,7 @@ services:
 
   ## FRONTEND DEVELOPER
   frontend-developer:
-    build: build/dev/vue
+    build: docker/dev/vue
     command: --scope=frontend-developer-dragoncore
     volumes:
       - .:/app
@@ -53,7 +53,7 @@ services:
 
   ## FRONTEND DEVELOPER
   frontend-auth:
-    build: build/dev/vue
+    build: docker/dev/vue
     command: --scope=frontend-auth-dragoncore
     volumes:
       - .:/app
@@ -71,7 +71,7 @@ services:
   db:
     image: postgres:12
     volumes:
-      - ./build/dev/postgres/init:/docker-entrypoint-initdb.d
+      - ./docker/dev/postgres/init:/docker-entrypoint-initdb.d
     networks:
       - db-dev
     environment:
@@ -81,7 +81,7 @@ services:
 
   # PGADMIN
   pgadmin:
-    build: build/dev/pgadmin
+    build: docker/dev/pgadmin
     networks:
       - db-dev
     depends_on:
@@ -91,7 +91,7 @@ services:
 
   # ORY HYDRA / OAUTH2
   hydra:
-    build: build/dev/hydra
+    build: docker/dev/hydra
     networks:
       - web-dev
       - db-dev
@@ -101,7 +101,7 @@ services:
       - LOG_LEVEL=debug
       - SECRETS_SYSTEM=dragoncoresecret
       - DSN=postgres://postgres:postgres@db/hydra?sslmode=disable
-      - URLS_SELF_ISSUER=https://localhost:4445
+      - URLS_SELF_ISSUER=http://localhost:4444
       - URLS_CONSENT=http://api.communitydragon.localhost/oauth2/consent
       - URLS_CONSENT=http://api.communitydragon.localhost/oauth2/login
     ports:
@@ -128,7 +128,7 @@ services:
       - --entrypoints.http.address=:80                    # sets the unsecured http address to :80
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./build/dev/traefik:/traefik
+      - ./docker/dev/traefik:/traefik
     ports:
       - 80:80
     networks:
@@ -145,6 +145,27 @@ services:
       - "traefik.docker.network=dragoncore_web-dev"
       - "traefik.http.routers.proxy.rule=Host(`traefik.communitydragon.localhost`)"
       - "traefik.http.routers.proxy.service=api@internal"
+
+  # MIGRATION TOOL
+  migrate:
+    build: docker/dev/migrate
+    volumes:
+      - ./migrations:/migrations
+    networks:
+      - db-dev
+    depends_on:
+      - db
+
+  # MIGRATION GENERATOR
+  generate_migration:
+    build: docker/dev/genmig
+    volumes:
+      - ./migrations:/migrations:rw
+      - ./config/database:/metadata:rw
+    networks:
+      - db-dev
+    depends_on:
+      - db
 
 networks:
   web-dev:

@@ -1,0 +1,5 @@
+extension plpgsql: extension.yaml
+schema public:
+  schema: schema.public.yaml
+  table token: schema.public/table.token.yaml
+  table user_account: schema.public/table.user_account.yaml

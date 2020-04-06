@@ -24,17 +24,17 @@ func (b *bundler) Bundle(module *module) *bundler {
 // Register registers all bundles
 func (b *bundler) Register(e echoswagger.ApiRoot) (errs []error) {
 	var wg sync.WaitGroup
-	for _, module := range b.modules {
+	for _, mod := range b.modules {
 		wg.Add(1)
-		go func() {
+		go func(mod *module) {
 			defer wg.Done()
-			if err := module.Register(e); err != nil {
+			if err := mod.Register(e); err != nil {
 				errs = append(errs, err)
-				fmt.Printf("failed to register module %s:\n%s\n", module.name, err.Error())
+				fmt.Printf("failed to register module %s:\n%s\n", mod.name, err.Error())
 			} else {
-				fmt.Printf("successfully registered module %s\n", module.name)
+				fmt.Printf("successfully registered module %s\n", mod.name)
 			}
-		}()
+		}(mod)
 	}
 	wg.Wait()
 	return errs

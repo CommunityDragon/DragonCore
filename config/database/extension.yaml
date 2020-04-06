@@ -1,0 +1,4 @@
+extension plpgsql:
+  description: PL/pgSQL procedural language
+  schema: pg_catalog
+  version: '1.0'

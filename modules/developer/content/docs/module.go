@@ -5,7 +5,7 @@ import (
 	"dragonback/lib/models/repo"
 )
 
-var Module = module.New("Developer Documentation").
+var Module = module.New("Developer Documentation Content").
 	SetInit(func() (err error) {
 		err = repo.New(repo.CDragonDocs).Clone()
 		return err

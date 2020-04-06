@@ -8,7 +8,7 @@ Everything related to CommunityDragon will be interlinked with DragonCore
 ```
 ROOT
  ├─ .external/          # External repositories
- ├─ build/              # All build files for CI/CD and local development
+ ├─ docker/             # All docker files for CI/CD and local development
  ├─ frontend/           # All front-end libraries and projects
  │   ├─ main/           # Main front-end using Nuxt
  │   ├─ auth/           # Authentication front-end using plain Vue
