@@ -9,5 +9,5 @@ hydra clients create \
     --endpoint http://0.0.0.0:4445 \
     --response-types code,id_token \
     --grant-types refresh_token,authorization_code \
-    --callbacks http://api.communitydragon.localhost/oauth2/callback &>/dev/null &
+    --callbacks http://api.communitydragon.localhost/auth/callback &>/dev/null &
 hydra serve all --dangerous-force-http

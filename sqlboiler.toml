@@ -1,0 +1,11 @@
+pkgname = "entities"
+output = "lib/entities"
+
+[psql]
+dbname = "app"
+host   = "db"
+port   = 5432
+user   = "postgres"
+pass   = "postgres"
+sslmode = "disable"
+blacklist = ["migrations"]

@@ -1,41 +1,39 @@
 package auth_oauth2
 
 import (
+	mw "dragonback/lib/middleware"
 	"dragonback/lib/models/controller"
 	"dragonback/lib/models/swaggerdocs"
-	"fmt"
-	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 	"net/http"
 )
 
-var handler = controller.New("/oauth2").
+var handler = controller.New("/auth").
 
 	// registers a user
 	Handler(
 		controller.POST,
 		"/register",
+
 		swaggerdocs.New().
 			SetDescription("Registers a new user.").
 			AddParamBody(loginPayload{}, "body", "Login Payload", true).
-			AddResponse(http.StatusOK, "successful", []string{}, nil),
-		func(c echo.Context) (err error) {
-			payload := new(loginPayload)
-			if err = c.Bind(payload); err != nil {
-				return
-			}
+			AddResponse(http.StatusCreated, "successful", userResponse{}, nil),
 
-			if err = c.Validate(payload); err != nil {
-				fmt.Print(err)
-				return
-			}
-			return c.JSON(http.StatusOK, payload)
-	}).
+		registerUser,
+		mw.PayloadBinder(loginPayload{}),
+		middleware.Recover()).
 
 	// logs a user in
-	Handler(controller.POST, "/login", nil, func(c echo.Context) (err error) {
-		payload := new(loginPayload)
-		if err = c.Bind(payload); err != nil {
-			return
-		}
-		return c.JSON(http.StatusOK, nil)
-	})
+	Handler(
+		controller.POST,
+		"/login",
+
+		swaggerdocs.New().
+			SetDescription("Logs in a user.").
+			AddParamBody(loginPayload{}, "body", "Login Payload", true).
+			AddResponse(http.StatusOK, "successful", userResponse{}, nil),
+
+		loginUser,
+		mw.PayloadBinder(loginPayload{}),
+		middleware.Recover())

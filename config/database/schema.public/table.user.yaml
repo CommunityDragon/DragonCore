@@ -1,0 +1,15 @@
+table user:
+  columns:
+    - id:
+        type: uuid
+        default: uuid_generate_v4()
+    - email:
+        type: varchar(255)
+        not_null: true
+    - password:
+        type: bytea
+        not_null: true
+  primary_key:
+    user_pk:
+      columns:
+        - id

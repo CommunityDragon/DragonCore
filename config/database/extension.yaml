@@ -2,3 +2,7 @@ extension plpgsql:
   description: PL/pgSQL procedural language
   schema: pg_catalog
   version: '1.0'
+
+extension uuid-ossp:
+  description: UUID generation support
+  schema: pg_catalog
