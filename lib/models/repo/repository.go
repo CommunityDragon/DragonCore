@@ -2,7 +2,7 @@ package repo
 
 import (
 	"crypto/md5"
-	"dragonback/lib/models/md"
+	"dragoncore/lib/models/md"
 	"encoding/hex"
 	"gopkg.in/src-d/go-git.v4"
 	"os"

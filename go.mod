@@ -1,4 +1,4 @@
-module dragonback
+module dragoncore
 
 go 1.13
 

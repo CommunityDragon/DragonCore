@@ -1,7 +1,7 @@
 package module
 
 import (
-	"dragonback/lib/models/controller"
+	"dragoncore/lib/models/controller"
 	"github.com/pangpanglabs/echoswagger/v2"
 )
 

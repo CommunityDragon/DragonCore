@@ -1,9 +1,9 @@
 package developer_content_docs
 
 import (
-	"dragonback/lib/models/controller"
-	"dragonback/lib/models/repo"
-	"dragonback/lib/models/swaggerdocs"
+	"dragoncore/lib/models/controller"
+	"dragoncore/lib/models/repo"
+	"dragoncore/lib/models/swaggerdocs"
 	"github.com/labstack/echo/v4"
 	"net/http"
 )

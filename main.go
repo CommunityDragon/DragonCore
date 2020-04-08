@@ -1,8 +1,8 @@
 package main
 
 import (
-	"dragonback/lib/models/validator"
-	"dragonback/modules"
+	"dragoncore/lib/models/validator"
+	"dragoncore/modules"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"github.com/pangpanglabs/echoswagger/v2"

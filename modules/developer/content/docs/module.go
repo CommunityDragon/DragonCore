@@ -1,8 +1,8 @@
 package developer_content_docs
 
 import (
-	"dragonback/lib/models/module"
-	"dragonback/lib/models/repo"
+	"dragoncore/lib/models/module"
+	"dragoncore/lib/models/repo"
 )
 
 var Module = module.New("Developer Documentation Content").

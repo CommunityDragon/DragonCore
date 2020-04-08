@@ -1,7 +1,7 @@
 package controller
 
 import (
-	"dragonback/lib/models/swaggerdocs"
+	"dragoncore/lib/models/swaggerdocs"
 	"github.com/labstack/echo/v4"
 	"github.com/pangpanglabs/echoswagger/v2"
 	"net/http"

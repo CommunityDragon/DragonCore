@@ -1,9 +1,9 @@
 package modules
 
 import (
-	"dragonback/lib/models/module"
-	"dragonback/modules/auth/oauth2"
-	"dragonback/modules/developer/content/docs"
+	"dragoncore/lib/models/module"
+	"dragoncore/modules/auth/oauth2"
+	"dragoncore/modules/developer/content/docs"
 )
 
 var Bundler = module.Bundler().

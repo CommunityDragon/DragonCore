@@ -1,9 +1,9 @@
 package auth_oauth2
 
 import (
-	"dragonback/lib/db"
-	"dragonback/lib/entities"
-	"dragonback/lib/util"
+	"dragoncore/lib/db"
+	"dragoncore/lib/entities"
+	"dragoncore/lib/util"
 	"github.com/labstack/echo/v4"
 	"github.com/volatiletech/sqlboiler/boil"
 	"github.com/volatiletech/sqlboiler/queries/qm"

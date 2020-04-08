@@ -1,9 +1,9 @@
 package auth_oauth2
 
 import (
-	mw "dragonback/lib/middleware"
-	"dragonback/lib/models/controller"
-	"dragonback/lib/models/swaggerdocs"
+	mw "dragoncore/lib/middleware"
+	"dragoncore/lib/models/controller"
+	"dragoncore/lib/models/swaggerdocs"
 	"github.com/labstack/echo/v4/middleware"
 	"net/http"
 )
