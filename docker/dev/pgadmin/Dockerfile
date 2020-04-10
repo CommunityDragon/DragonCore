@@ -1,3 +1,7 @@
+# pgadmin
+#
+# this image is used in order to run pgadmin
+# in desktop mode
 FROM dpage/pgadmin4:4
 
 ENV PGADMIN_CONFIG_SERVER_MODE=False

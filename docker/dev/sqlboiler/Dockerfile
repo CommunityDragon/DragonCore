@@ -1,3 +1,7 @@
+# sqlboiler
+#
+# this image is used in order to create
+# go models from the database
 FROM golang:1.14
 
 RUN go get github.com/volatiletech/sqlboiler

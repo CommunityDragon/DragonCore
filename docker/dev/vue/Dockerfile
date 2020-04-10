@@ -1,3 +1,7 @@
+# vue
+#
+# this image is used in order to run nuxt
+# or vue in development mode
 FROM node:13
 
 # installs lerna

@@ -1,3 +1,7 @@
+# genmig
+#
+# this image is used in order to create a migration
+# using a temporary database
 FROM alpine:3.11
 
 # updates package listing
@@ -36,10 +40,13 @@ RUN python setup.py install
 WORKDIR /
 RUN rm -rf /tmp/pyrseas
 
-ENV PGUSERNAME=postgres
-ENV PGPASSWORD=postgres
-
+# imports the genmig bash script
 COPY genmig.sh /usr/local/bin/genmig
 RUN chmod +x /usr/local/bin/genmig
+
+# default environmental variables
+ENV DB_USER=postgres
+ENV DB_PASS=postgres
+ENV DB_HOST=db
 
 ENTRYPOINT ["genmig"]

@@ -32,6 +32,16 @@ func registerUser(c echo.Context) error {
 	return c.JSON(http.StatusOK, &userResponse{user.ID, user.Email})
 }
 
+// renderRegister renders the registration page
+func renderRegister(c echo.Context) error {
+	//cookie := new(http.Cookie)
+
+	//hydra := c.Get("service_hydra").(services.HydraService)
+	//hydra.
+	return c.Redirect(http.StatusTemporaryRedirect, "http://auth.communitydragon.localhost")
+}
+
+// loginUser logs in a user
 func loginUser(c echo.Context) (err error) {
 	payload := c.Get("payload").(*loginPayload)
 	user, err := entities.Users(qm.Where("email=?", payload.Email)).One(c.Request().Context(), db.DB())

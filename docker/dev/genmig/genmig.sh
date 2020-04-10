@@ -5,8 +5,12 @@ if [[ -z "$1" ]]; then
     exit 0;
 fi
 
+PGUSERNAME=$DB_USER
+# shellcheck disable=SC2034
+PGPASSWORD=$DB_PASS
+
 NAME=$1
-CURRENTTIME=`date +"%Y%m%d%H%M%S"`
+CURRENTTIME=$(date +"%Y%m%d%H%M%S")
 
 # returns an error
 function handle_error() {
@@ -18,7 +22,7 @@ function handle_error() {
 
 # connects to the default database
 function psql_glob() {
-    psql -v ON_ERROR_STOP=1 -q -U "$PGUSERNAME" -h db $@
+    psql -v ON_ERROR_STOP=1 -q -U "$PGUSERNAME" -h "$DB_HOST" $@
 }
 
 # connects to the migrate database
@@ -62,7 +66,7 @@ function migrate_up() {
     find /migrations -type f -name "*.up.sql" -print0 | sort | while read filename; do
         echo "running $filename";
         failed_file=""
-        psql_migrate -f $filename 2> /dev/null;
+        psql_migrate -f "$filename" 2> /dev/null;
         handle_error "migration $filename failed to execute"
         echo "completed $filename"
     done
@@ -73,7 +77,7 @@ function migrate_up() {
 
 # local yamltodb
 function yamltodb_l() {
-    yamltodb -H db -U $PGUSERNAME $@
+    yamltodb -H $DB_HOST -U "$PGUSERNAME" $@
 }
 
 # generates a migration
@@ -107,10 +111,10 @@ function gen_mig_down() {
 
 # removes migration if empty
 function remove_mig_if_empty() {
-    if [ ! -s /migrations/${CURRENTTIME}_${NAME}.up.sql ]; then
+    if [ ! -s "/migrations/${CURRENTTIME}_${NAME}.up.sql" ]; then
         echo "no changes in migration, so removing migration..."
-        rm /migrations/${CURRENTTIME}_${NAME}.up.sql
-        rm /migrations/${CURRENTTIME}_${NAME}.down.sql
+        rm "/migrations/${CURRENTTIME}_${NAME}.up.sql"
+        rm "/migrations/${CURRENTTIME}_${NAME}.down.sql"
         echo "new migration removed"
     fi
 }

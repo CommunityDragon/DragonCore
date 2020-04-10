@@ -1,3 +1,7 @@
+# hydra
+#
+# this image is used in order to run the echo
+# server with hot reload
 FROM golang:1.14
 
 # installs air
@@ -8,6 +12,13 @@ RUN make ci && make install
 
 # set workdir to /app
 WORKDIR /app
+
+# default environmental variables
+ENV DB_USER=postgres
+ENV DB_PASS=postgres
+ENV DB_HOST=db
+ENV DB_NAME=app
+ENV DB_SSL=disable
 
 # run air
 ENTRYPOINT ["/go/bin/air"]

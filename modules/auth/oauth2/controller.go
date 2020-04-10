@@ -24,6 +24,17 @@ var handler = controller.New("/auth").
 		mw.PayloadBinder(loginPayload{}),
 		middleware.Recover()).
 
+	// registers a user
+	Handler(
+		controller.GET,
+		"/register",
+
+		swaggerdocs.New().
+			SetDescription("Loads the registration page."),
+
+		renderRegister,
+		middleware.CSRF()).
+
 	// logs a user in
 	Handler(
 		controller.POST,

@@ -1,4 +1,11 @@
-# DragonCore
+```
+  ____                               ____               
+ |  _ \ _ __ __ _  __ _  ___  _ __  / ___|___  _ __ ___ 
+ | | | | '__/ _` |/ _` |/ _ \| '_ \| |   / _ \| '__/ _ \
+ | |_| | | | (_| | (_| | (_) | | | | |__| (_) | | |  __/
+ |____/|_|  \__,_|\__, |\___/|_| |_|\____\___/|_|  \___|
+                  |___/                                 
+```
 DragonCore is a hub for CommunityDragon.
 Everything related to CommunityDragon will be interlinked with DragonCore
 
@@ -17,6 +24,7 @@ ROOT
  ├─ lib/                # The API library
  │   └─ models/         # The API models
  │
+ ├─ migrations/         # All migrations for the database
  ├─ modules/            # The API is split up in modules, this is the directory for it
  ├─ ...
  ├─ lerna.json          # Lerna configuration for managing all front-end projects

@@ -1,24 +1,22 @@
-# frontend-auth-dragoncore
+# dragon-front-auth
 
-## Project setup
-```
-yarn install
+> CommunityDragon Front-End
+
+## Build Setup
+
+``` bash
+# install dependencies
+$ yarn install
+
+# serve with hot reload at localhost:8082
+$ yarn dev
+
+# build for production and launch server
+$ yarn build
+$ yarn start
+
+# generate static project
+$ yarn generate
 ```
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
