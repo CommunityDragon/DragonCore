@@ -1,55 +1,64 @@
 <template>
-  <div>
+  <div class="h-full">
+    <div class="bg-animated"></div>
+    <div class="bg-gradient"></div>
     <nuxt />
   </div>
 </template>
 
-<style>
+<style lang="postcss">
 html {
-  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, 'Helvetica Neue', Arial, sans-serif;
-  font-size: 16px;
-  word-spacing: 1px;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  box-sizing: border-box;
+  @apply antialiased leading-snug;
+  @apply bg-gray-400;
+
+  @screen dark {
+    @apply bg-gray-950;
+  }
 }
 
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
-  margin: 0;
+body {
+  @apply flex flex-col min-h-screen;
 }
 
-.button--green {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #3b8070;
-  color: #3b8070;
-  text-decoration: none;
-  padding: 10px 30px;
+#__nuxt,
+#__layout {
+  @apply h-screen;
+}
+</style>
+<style lang="postcss" scoped>
+@keyframes move-bg {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 1200px 600px;
+  }
 }
 
-.button--green:hover {
-  color: #fff;
-  background-color: #3b8070;
+.bg-animated,
+.bg-gradient {
+  @apply fixed top-0 left-0 w-full h-full;
+  z-index: -1;
 }
 
-.button--grey {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #35495e;
-  color: #35495e;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
+.bg-gradient {
+  background: linear-gradient(to right, #bdbdbd 50%, transparent 50%);
+
+  @screen dark {
+    background: linear-gradient(to right, #212121 40%, transparent);
+  }
 }
 
-.button--grey:hover {
-  color: #fff;
-  background-color: #35495e;
+.bg-animated {
+  @apply bg-gray-900;
+  animation: move-bg 60s infinite;
+  animation-timing-function: linear;
+  background-size: 600px;
+  background-image: url('~assets/img/bg-light.svg');
+
+  @screen dark {
+    @apply bg-black;
+    background-image: url('~assets/img/bg-dark.svg');
+  }
 }
 </style>

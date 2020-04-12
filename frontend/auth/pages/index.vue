@@ -1,73 +1,69 @@
 <template>
   <div class="container">
-    <div>
-      <logo />
-      <h1 class="title">
-        dragon-front-auth
-      </h1>
-      <h2 class="subtitle">
-        CommunityDragon Front-End
-      </h2>
-      <div class="links">
-        <a href="https://nuxtjs.org/" target="_blank" class="button--green">
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
+    <div class="p-8 inline-block flex w-full justify-center">
+      <card width="160">
+        <div class="card__content">
+          <div class="card__half flex justify-center">
+            <img
+              src="~assets/img/logo-white.png"
+              width="200"
+              class="object-contain"
+            />
+          </div>
+          <div class="card__half">
+            <h1 class="card__title">Welcome Back</h1>
+            <br />
+            <form>
+              <form-input label="Username/Email" />
+              <form-input label="Password" type="password" />
+              <a href="#">Forgot your password?</a>
+              <br />
+              <button
+                href="#"
+                class="bg-gray-900 text-gray-100 px-5 py-3 w-full block font-semibold rounded"
+              >
+                Sign In
+              </button>
+              Need an account? <a href="#">Register</a>
+            </form>
+          </div>
+        </div>
+      </card>
     </div>
   </div>
 </template>
 
-<script>
-import Logo from '~/components/Logo.vue'
+<script lang="ts">
+import { Vue, Component } from 'nuxt-property-decorator'
+import { FormInput } from '~/components/forms'
+import { Card } from '~/components/cards'
 
-export default {
-  components: {
-    Logo
-  }
-}
+@Component({
+  components: { FormInput, Card }
+})
+export default class HomePage extends Vue {}
 </script>
 
-<style>
-/* Sample `apply` at-rules with Tailwind CSS
+<style lang="postcss" scoped>
 .container {
-  @apply min-h-screen flex justify-center items-center text-center mx-auto;
-}
-*/
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+  @apply flex items-center justify-center h-full m-auto;
 }
 
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
+.card__title {
+  @apply text-center text-3xl;
+  font-family: 'IBM Plex Sans', sans-serif;
 }
 
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
+.card__content {
+  @apply flex;
+  @apply w-full;
 
-.links {
-  padding-top: 15px;
+  > * {
+    @apply p-4;
+  }
+
+  .card__half {
+    @apply w-1/2;
+  }
 }
 </style>

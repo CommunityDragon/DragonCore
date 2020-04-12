@@ -1,36 +1,38 @@
-const micro = require('micro')
+'use strict'
+const path = require('path')
 const consola = require('consola')
-const dispatch = require('micro-route/dispatch')
-const { Nuxt, Builder } = require('nuxt')
+const feathers = require('@feathersjs/feathers')
+const express = require('@feathersjs/express')
+
+process.env.NODE_CONFIG_DIR = path.join(__dirname, 'config/')
 
 async function start() {
-  // Require nuxt config
+  const app = express(feathers())
+
+  const { Nuxt, Builder } = require('nuxt')
+
+  // Setup nuxt.js
   const config = require('../nuxt.config.js')
+  config.rootDir = path.resolve(__dirname, '..')
+  config.dev = process.env.NODE_ENV !== 'production'
 
-  // Create a new nuxt instance
   const nuxt = new Nuxt(config)
-
   await nuxt.ready()
-  // Enable live build & reloading on dev
-  if (nuxt.options.dev) {
-    await new Builder(nuxt).build()
+  if (config.dev) {
+    const builder = new Builder(nuxt)
+    await builder.build()
   }
 
-  const server = micro(async (req, res) => {
-    await dispatch().dispatch('*', ['GET'], (req, res) =>
-      nuxt.render(req, res)
-    )(req, res)
-  })
+  const configuration = require('@feathersjs/configuration')
+  app.configure(configuration()).use(nuxt.render)
 
-  const {
-    host = process.env.HOST || '0.0.0.0',
-    port = process.env.PORT || 8082
-  } = nuxt.options.server
+  const host = app.get('host')
+  const port = app.get('port')
 
-  // Listen the server
-  server.listen(port, host)
+  app.listen(port)
+
   consola.ready({
-    message: `Server listening on http://${host}:${port}`,
+    message: `Feathers application started on ${host}:${port}`,
     badge: true
   })
 }

@@ -1,10 +1,10 @@
-# dragon-front-auth
+# frontend-auth-dragoncore
 
-> CommunityDragon Front-End
+> CommunityDragon Auth Front-End
 
 ## Build Setup
 
-``` bash
+```bash
 # install dependencies
 $ yarn install
 

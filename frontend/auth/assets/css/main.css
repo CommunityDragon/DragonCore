@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100;200;300;400;500;600;700&display=swap');
+
+@font-face {
+  font-family: 'Jetbrains Mono';
+  font-weight: 400;
+  src: url('~assets/fonts/JetbrainsMono/JetbrainsMono-Regular.ttf')  format('truetype');
+}
+
+@font-face {
+  font-family: 'Jetbrains Mono';
+  font-weight: 500;
+  src: url('~assets/fonts/JetbrainsMono/JetbrainsMono-Medium.ttf')  format('truetype');
+}
+
+@font-face {
+  font-family: 'Jetbrains Mono';
+  font-weight: 700;
+  src: url('~assets/fonts/JetbrainsMono/JetbrainsMono-Bold.ttf')  format('truetype');
+}
+
+@font-face {
+  font-family: 'Jetbrains Mono';
+  font-weight: 800;
+  src: url('~assets/fonts/JetbrainsMono/JetbrainsMono-ExtraBold.ttf')  format('truetype');
+}

@@ -1,6 +1,6 @@
 {
   "name": "frontend-auth-dragoncore",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "CommunityDragon Auth Front-End",
   "author": "CommunityDragon",
   "private": true,
@@ -24,17 +24,21 @@
     }
   },
   "dependencies": {
-    "nuxt": "^2.0.0",
-    "cross-env": "^5.2.0",
-    "micro": "^9.3.3",
-    "micro-route": "^2.5.0",
+    "@feathersjs/configuration": "^2.0.6",
+    "@feathersjs/express": "^1.3.1",
+    "@feathersjs/feathers": "^3.3.1",
     "@nuxtjs/axios": "^5.3.6",
-    "@nuxtjs/pwa": "^3.0.0-0",
-    "@nuxtjs/dotenv": "^1.4.0"
+    "@nuxtjs/dotenv": "^1.4.0",
+    "cross-env": "^5.2.0",
+    "nuxt": "^2.0.0",
+    "nuxt-property-decorator": "^2.5.1",
+    "vue-class-component": "^7.2.3",
+    "vue-fragment": "^1.5.1"
   },
   "devDependencies": {
     "@ava/babel": "^1.0.0",
-    "@nuxtjs/eslint-config": "^2.0.0",
+    "@nuxt/typescript-build": "^0.6.0",
+    "@nuxtjs/eslint-config-typescript": "^1.0.0",
     "@nuxtjs/eslint-module": "^1.0.0",
     "@nuxtjs/stylelint-module": "^3.1.0",
     "@nuxtjs/tailwindcss": "^1.0.0",
@@ -48,9 +52,9 @@
     "eslint-plugin-nuxt": ">=0.4.2",
     "eslint-plugin-prettier": "^3.1.2",
     "husky": "^4.0.0",
-    "lerna": "^3.20.2",
     "lint-staged": "^10.0.0",
     "nodemon": "^1.18.9",
+    "postcss-nested": "^4.2.1",
     "prettier": "^1.19.1",
     "require-extension-hooks": "^0.3.3",
     "require-extension-hooks-babel": "^1.0.0",

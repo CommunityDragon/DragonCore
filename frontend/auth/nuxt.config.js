@@ -1,3 +1,5 @@
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+
 module.exports = {
   mode: 'universal',
   /*
@@ -23,17 +25,20 @@ module.exports = {
   /*
    ** Global CSS
    */
-  css: [],
+  css: [
+    '@/assets/css/main.css',
+  ],
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: [
+    '~/plugins/vue-fragment'
+  ],
   /*
    ** Nuxt.js dev-modules
    */
   buildModules: [
-    // Doc: https://github.com/nuxt-community/eslint-module
-    '@nuxtjs/eslint-module',
+    '@nuxt/typescript-build',
     // Doc: https://github.com/nuxt-community/stylelint-module
     '@nuxtjs/stylelint-module',
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
@@ -45,7 +50,6 @@ module.exports = {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    '@nuxtjs/pwa',
     // Doc: https://github.com/nuxt-community/dotenv-module
     '@nuxtjs/dotenv'
   ],
@@ -58,16 +62,26 @@ module.exports = {
    ** Build configuration
    */
   build: {
+    postcss: {
+      plugins: {
+        'postcss-nested': {},
+      },
+    },
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) {}
-  },
-  /**
-   * Server settings
-   */
-  server: {
-    port: 8082,
-    host: '0.0.0.0'
+    extend(config, ctx) {
+      if (ctx.isDev && ctx.isClient) {
+        config.module.rules.push({
+          enforce: 'pre',
+          test: /\.(js|ts|vue)$/,
+          loader: 'eslint-loader',
+          exclude: /(node_modules)/,
+          options: {
+            fix: true,
+          }
+        })
+      }
+    }
   }
 }
