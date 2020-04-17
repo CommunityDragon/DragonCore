@@ -52,7 +52,7 @@ services:
       - "traefik.http.routers.frontend-developer.service=frontend-developer-dragoncore"
       - "traefik.http.services.frontend-developer-dragoncore.loadbalancer.server.port=8081"
 
-  ## FRONTEND DEVELOPER
+  ## FRONTEND AUTH
   frontend-auth:
     build: docker/dev/vue
     command: --scope=frontend-auth-dragoncore
