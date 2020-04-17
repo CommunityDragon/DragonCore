@@ -3,7 +3,7 @@ version: '3'
 services:
   ## FRONTEND MAIN
   frontend-main:
-    image: docker.pkg.github.com/communitydragon/dragoncore/frontend-main:${version:-latest}
+    image: docker.pkg.github.com/communitydragon/dragoncore/frontend-main:${VERSION:-latest}
     build:
       context: .
       dockerfile: ./docker/prod/vue/Dockerfile
